@@ -2,7 +2,7 @@ Param(
     [Parameter(HelpMessage = "Specifies the pattern of the environments you want to retreive (* for all)", Mandatory = $true)]
     [string] $getEnvironments,
     [Parameter(HelpMessage = "Type of deployment (CD or Publish)", Mandatory = $true)]
-    [ValidateSet('CD','Publish')]
+    [ValidateSet('CD','Publish', 'PPDev')]
     [string] $type
 )
 
@@ -168,9 +168,10 @@ else {
 
         # Include Environment if:
         # - Type is not Continous Deployment
+        # - Type is PPDev
         # - Environment is setup for Continuous Deployment (in settings)
         # - Continuous Deployment is unset in settings and environment name doesn't contain PROD or FAT tags
-        $includeEnvironment = ($type -ne "CD" -or $deploymentSettings.ContinuousDeployment -or ($null -eq $deploymentSettings.ContinuousDeployment -and !($environmentName -like '* (PROD)' -or $environmentName -like '* (Production)' -or $environmentName -like '* (FAT)' -or $environmentName -like '* (Final Acceptance Test)')))
+        $includeEnvironment = ($type -ne "CD" -or type -ne "PPDev" -or $deploymentSettings.ContinuousDeployment -or ($null -eq $deploymentSettings.ContinuousDeployment -and !($environmentName -like '* (PROD)' -or $environmentName -like '* (Production)' -or $environmentName -like '* (FAT)' -or $environmentName -like '* (Final Acceptance Test)')))
 
         # Check branch policies and settings
         if (-not $includeEnvironment) {
