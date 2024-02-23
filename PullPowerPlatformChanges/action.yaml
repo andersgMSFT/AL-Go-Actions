@@ -39,7 +39,7 @@ runs:
   steps:
     - name: Install Power Platform Tools
       uses: microsoft/powerplatform-actions/actions-install@v1
-      
+
     - name: Get Actions Repo and Ref
       shell: ${{ inputs.shell }}
       env:
