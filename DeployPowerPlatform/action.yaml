@@ -61,13 +61,6 @@ runs:
         shell: ${{ inputs.shell }}
         deploymentEnvironmentsJson: ${{ inputs.deploymentEnvironmentsJson }} 
         environmentName: ${{ inputs.environmentName }}
-    
-    - name: Validate Authentication Information Provided
-      shell: ${{ inputs.shell }}
-      if: steps.ReadPowerPlatformSettings.outputs.ppUserName == '' && steps.ReadPowerPlatformSettings.outputs.ppApplicationId == ''
-      run: |
-        Write-Error "Error: Both ppUserName and ppApplicationId are empty. Please provide at least one."
-        exit 1
 
     - name: Who am I (username)
       if: steps.ReadPowerPlatformSettings.outputs.ppUserName != ''
