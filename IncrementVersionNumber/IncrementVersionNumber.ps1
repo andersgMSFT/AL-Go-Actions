@@ -36,6 +36,7 @@ try {
     $allAppFolders = @()
     foreach($project in $projectList) {
         $projectPath = Join-Path $baseFolder $project
+        write-host $projectPath;
         
         if ($settings.powerPlatformSolutionFolder -eq $project) {
             Update-PowerPlatformSolutionVersion -powerPlatformSolutionPath $projectPath -newValue $versionNumber
