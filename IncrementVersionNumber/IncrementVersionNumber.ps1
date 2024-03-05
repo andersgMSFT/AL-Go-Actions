@@ -64,9 +64,13 @@ try {
         $allAppFolders += $projectSettings.testFolders | ForEach-Object { Join-Path $projectPath $_ -Resolve }
         $allAppFolders += $projectSettings.bcptTestFolders | ForEach-Object { Join-Path $projectPath $_ -Resolve }
     }
-
-    # Set dependencies in app manifests
-    Set-DependenciesVersionInAppManifests -appFolders $allAppFolders
+    If($allAppFolders.Count -eq 0) {
+        write-host "No App folders in repo"
+    }
+    else {
+        # Set dependencies in app manifests
+        Set-DependenciesVersionInAppManifests -appFolders $allAppFolders
+    }
 
     $commitMessage = "New Version number $versionNumber"
     if ($versionNumber.StartsWith('+')) {
