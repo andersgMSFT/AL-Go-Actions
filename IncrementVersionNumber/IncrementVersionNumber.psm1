@@ -258,7 +258,7 @@ function Update-PowerPlatformSolutionVersion {
                     $newVersion = $version.ToString()
                 }
                 else {
-                    throw "Invalid version number $newValue"
+                    throw "Invalid version number $newValue. Should be: major.minor.build.revision"
                 }
             }
 
