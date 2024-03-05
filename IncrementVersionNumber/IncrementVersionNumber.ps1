@@ -38,7 +38,7 @@ try {
         $projectPath = Join-Path $baseFolder $project
         
         if ($settings.powerPlatformSolutionFolder -eq $project) {
-            Update-PowerPlatformSolutionVersion powerPlatformSolutionPath $projectPath -newValue $versionNumber
+            Update-PowerPlatformSolutionVersion -powerPlatformSolutionPath $projectPath -newValue $versionNumber
             continue
         }
 
