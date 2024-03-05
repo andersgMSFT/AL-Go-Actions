@@ -39,11 +39,7 @@ try {
     $allAppFolders = @()
     foreach($project in $projectList) {
         $projectPath = Join-Path $baseFolder $project
-        if ($settings.powerPlatformSolutionFolder -eq $project) {
-            Update-PowerPlatformSolutionVersion powerPlatformSolutionPath $projectPath -newValue $versionNumber
-            continue
-        }
-
+        
         $projectSettingsPath = Join-Path $projectPath $ALGoSettingsFile # $ALGoSettingsFile is defined in AL-Go-Helper.ps1
         $settings = ReadSettings -baseFolder $baseFolder -project $project
 
@@ -59,6 +55,11 @@ try {
 
         # Set version in app manifests (app.json files)
         Set-VersionInAppManifests -projectPath $projectPath -projectSettings $projectSettings -newValue $versionNumber
+
+        if ($settings.powerPlatformSolutionFolder -eq $project) {
+            Update-PowerPlatformSolutionVersion powerPlatformSolutionPath $projectPath -newValue $versionNumber
+            continue
+        }
 
         # Collect all project's app folders
         $allAppFolders += $projectSettings.appFolders | ForEach-Object { Join-Path $projectPath $_ -Resolve }
