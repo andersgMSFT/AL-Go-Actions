@@ -21,7 +21,7 @@ try {
     . (Join-Path -Path $PSScriptRoot -ChildPath "..\AL-Go-Helper.ps1" -Resolve)
     ls ;
     ls $PSScriptRoot;
-    write-host Get-Content -Path (Join-Path -path $PSScriptRoot -ChildPath "IncrementVersionNumber.psm1" -Resolve);
+    Get-Content -Path (Join-Path -path $PSScriptRoot -ChildPath "IncrementVersionNumber.psm1" -Resolve) | write-host
  
     Import-Module (Join-Path -path $PSScriptRoot -ChildPath "IncrementVersionNumber.psm1" -Resolve)
 
